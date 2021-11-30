@@ -22,10 +22,10 @@ public class MessageReader {
 	
 	public static final ArrayList<Message> messageList = new ArrayList<Message>(); // unknown number of lines to be read
 
-	public static void FIXMessageReader() {
+	public static void FIXMessageReader(String filename) {
 		try {
 			DataDictionary dd = new DataDictionary("FIX44.xml");
-			FileInputStream fis = new FileInputStream("output.txt");
+			FileInputStream fis = new FileInputStream(filename);
 			Scanner sc = new Scanner(fis);
 			while (sc.hasNextLine()) {
 				String stringMessage = sc.nextLine();
@@ -46,8 +46,8 @@ public class MessageReader {
 	}
 	
 	
-	public static void allMsgsCsv() {
-		File output = new File("AllMsgs.csv");
+	public static void allMsgsCsv(String filename) {
+		File output = new File(filename);
 		try {
 			//output.mkdirs();
 			output.createNewFile();
@@ -97,8 +97,8 @@ public class MessageReader {
 		return message;
 	}
 	
-	public static void writeFullFill() {
-		File output = new File("FullFill.txt");
+	public static void writeFullFill(String filename) {
+		File output = new File(filename);
 		OrdStatus ordStatus_field = new OrdStatus();
 		char ordStatus = ' ';
 		try {
