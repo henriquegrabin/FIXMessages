@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class MessagesGenerator {
 	
-	public static int messageNum = 5000;
+	public static int messageNum = 5;
 	public static Message[] messageArray = new Message[messageNum]; // array with all messages created
 	public static ArrayList<Order> openOrders = new ArrayList<Order>(); // arraylist with the orders that are not fully filled	
 
@@ -60,8 +60,13 @@ public class MessagesGenerator {
 			
 			System.out.println(messageArray[i].toString());
 		}
-		
+		// Part 1
 		writeTxtFile(); // write orders to txt file
+		
+		// Part 2
+		MessageReader.FIXMessageReader();
+		MessageReader.allMsgsCsv();
+		MessageReader.writeFullFill();
 
 	}
 	
