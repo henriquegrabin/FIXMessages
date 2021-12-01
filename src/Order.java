@@ -59,7 +59,7 @@ public class Order {
 	}
 	
 	public void ExecutePartial() {
-		System.out.println(this.leavesQty);
+		//System.out.println(this.leavesQty);
 		int partialFillQty = RandomFields.RandomQuantity(this.leavesQty); //quantidade partialfill
 		double partialFillPrice = this.price; //RandomFields.RandomPrice(); //preco do fill
 		

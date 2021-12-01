@@ -8,7 +8,10 @@ import java.util.Random;
 
 public class MessagesGenerator {
 	
-	public static int messageNum = 5000;
+	public static final int messageNum = 5000;
+	public static final int minFullFill = 2500; // minimum number of full fill messages to be created
+	public static int remainingMessages = messageNum;
+	public static int fullFillCreated = 0; // number of full fill messages created
 	
 	public static Message[] messageArray = new Message[messageNum]; // array with all messages created
 	public static ArrayList<Order> openOrders = new ArrayList<Order>(); // arraylist with the orders that are not fully filled	
@@ -53,27 +56,34 @@ public class MessagesGenerator {
 			if ((openOrders.size() != 0) && (chooseOrder == 0)){ // use open order
 				int orderIndex = r.nextInt(openOrders.size());
 				order = openOrders.remove(orderIndex);
-				System.out.println("Open Order");
+				//System.out.println("Open Order");
 			} else { // use new order
-				System.out.println("New Order");
+				//System.out.println("New Order");
 				order = new Order();
 			}
 			
 			// partial fill or full fill
-			if ((chooseFill == 1) && (order.leavesQty >= 200)){ // new partial fill order
+			// new partial fill order
+			// if remaining quantity is 100 its not possible to fill partially
+			// if remaining messages == remaining full fill, then I must full fill so to create at least 2500 full fills
+			if ((chooseFill == 1) && (order.leavesQty >= 200) && (remainingMessages > (minFullFill - fullFillCreated))){ 
 				order.ExecutePartial();
 				openOrders.add(order);
-				System.out.println("Partial Fill");
+				//System.out.println("Partial Fill");
 			} else { //
-				System.out.println("Full Fill");
+				//System.out.println("Full Fill");
 				order.ExecuteAll();
+				fullFillCreated += 1;
+				
 			}	
 			messageArray[i] = MessageCreator.createMessage(order);
 			
 			// if the order was in the order list and we did 
 			
-			System.out.println(messageArray[i].toString());
+			//System.out.println(messageArray[i].toString());
+			remainingMessages -= 1;
 		}
+		System.out.println("Number of full fills: " + Integer.toString(fullFillCreated));
 	}
 	
 	public static void writeTxtFile(String fileName) {
