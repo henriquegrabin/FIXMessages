@@ -93,11 +93,11 @@ public class Order {
 	}
 	
 	public void updateMessageTimes() {
-		if (this.ordStatus == '0') // no previous message
+		if (this.lastExecTime == null) // no previous message
 			this.lastExecTime = RandomFields.RandomSendingTime();
 		else // there is previous message
-			this.lastExecTime = RandomFields.RandomSendingTime(); //falta implementar que o horario precisa ser
-		this.transactTime = this.lastExecTime; 
+			this.lastExecTime = RandomFields.RandomSendingTime(this.lastExecTime); //falta implementar que o horario precisa ser
+		this.transactTime = this.lastExecTime;
 		this.transactDate = RandomFields.getDate();
 	}
 	

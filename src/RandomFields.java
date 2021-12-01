@@ -2,6 +2,7 @@ import java.util.Random;
 import java.lang.Math;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.Duration;
 
 public class RandomFields {
 	
@@ -62,12 +63,19 @@ public class RandomFields {
 	
 	// horario
 	public static LocalDateTime RandomSendingTime() {
-		int hour = r.nextInt(8)+9;
+		int hour = r.nextInt(8)+10; // between 10:00 e 17:59:59:999
 		int minute = r.nextInt(59);
 		int second = r.nextInt(59);
 		int nanosecond = r.nextInt(999)*1000000;
 		//return new SendingTime(LocalDateTime.of(2021,  11, 27, hour, minute, second, nanosecond));
 		return LocalDateTime.of(2021, 11, 27, hour, minute, second, nanosecond);
+	}
+	
+	public static LocalDateTime RandomSendingTime(LocalDateTime firstLocalDateTime) {
+		LocalDateTime end = LocalDateTime.of(2021, 11, 27, 17, 59, 59, 999); // close time
+		long millis = Duration.between(firstLocalDateTime, end).toMillis();
+		// time of next trade is equal to the time of the last trade + random time up to 80% of the remaining time until close
+		return firstLocalDateTime.plus(Duration.ofMillis((long) (0.8*r.nextDouble() * millis)));
 	}
 
 	public static LocalDate getDate() {

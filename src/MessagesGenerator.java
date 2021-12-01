@@ -24,12 +24,12 @@ public class MessagesGenerator {
 		writeTxtFile("output.txt"); // write orders to txt file
 		
 		// Part 2
-		MessageReader.FIXMessageReader("output.txt"); //read orders from file
-		MessageReader.allMsgsCsv("AllMsgs.csv");
-		MessageReader.writeFullFill("FullFill.txt");
+		//MessageReader.FIXMessageReader("output.txt"); //read orders from file
+		//MessageReader.allMsgsCsv("AllMsgs.csv");
+		//MessageReader.writeFullFill("FullFill.txt");
 
 		// Part 3
-		FileCompare.compareFiles("FullFill.txt","AllMsgs.csv");
+		//FileCompare.compareFiles("FullFill.txt","AllMsgs.csv");
 	}
 	
 	public static void generateNewMessages() {
@@ -56,9 +56,9 @@ public class MessagesGenerator {
 			if ((openOrders.size() != 0) && (chooseOrder == 0)){ // use open order
 				int orderIndex = r.nextInt(openOrders.size());
 				order = openOrders.remove(orderIndex);
-				//System.out.println("Open Order");
+				System.out.println("Open Order");
 			} else { // use new order
-				//System.out.println("New Order");
+				System.out.println("New Order");
 				order = new Order();
 			}
 			
