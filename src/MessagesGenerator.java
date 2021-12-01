@@ -25,6 +25,8 @@ public class MessagesGenerator {
 		MessageReader.allMsgsCsv("AllMsgs.csv");
 		MessageReader.writeFullFill("FullFill.txt");
 
+		// Part 3
+		FileCompare.compareFiles("FullFill.txt","AllMsgs.csv");
 	}
 	
 	public static void generateNewMessages() {
