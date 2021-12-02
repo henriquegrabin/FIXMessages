@@ -4,18 +4,18 @@ import java.time.LocalDateTime;
 import quickfix.fix44.ExecutionReport.NoPartyIDs;
 
 public class OrderReader {
-	String account; //OK
-	String symbol; //OK
-	char side; // OK
-	int quantity; //OK
-	int lastQty; //OK
-	int cumQty; //OK
-	double lastPx; //OK
-	double lastNotional;
-	double orderNotional;
-	double cumNotional;
-	LocalDateTime transactTime; //OK
-	String trader; //OK
+	private String account; //OK
+	private String symbol; //OK
+	private char side; // OK
+	private int quantity; //OK
+	private int lastQty; //OK
+	private int cumQty; //OK
+	private double lastPx; //OK
+	private double lastNotional;
+	private double orderNotional;
+	private double cumNotional;
+	private LocalDateTime transactTime; //OK
+	private String trader; //OK
 	
 	public OrderReader(Message message) {
 		// Fields I am interested at
@@ -99,5 +99,12 @@ public class OrderReader {
 				"NotionaldaExecucaoAtual","NotionaldaExecucaoAcumulada", "EnteringTrader"};
 		return String.join(",", fields);
 	}
+	
+	public String getAccount() {return this.account;} //OK
+	public String getSymbol() {return this.symbol;} //OK
+	public char getSide() {return this.side;} // OK
+	public int getQuantity() {return this.quantity;} //OK
+	public double getLastPx() {return this.lastPx;} //OK
+
 	
 }

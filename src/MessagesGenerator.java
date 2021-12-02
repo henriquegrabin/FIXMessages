@@ -66,7 +66,7 @@ public class MessagesGenerator {
 			// new partial fill order
 			// if remaining quantity is 100 its not possible to fill partially
 			// if remaining messages == remaining full fill, then I must full fill so to create at least 2500 full fills
-			if ((chooseFill == 1) && (order.leavesQty >= 200) && (remainingMessages > (minFullFill - fullFillCreated))){ 
+			if ((chooseFill == 1) && (order.getLeavesQty() >= 200) && (remainingMessages > (minFullFill - fullFillCreated))){ 
 				order.ExecutePartial();
 				openOrders.add(order);
 				//System.out.println("Partial Fill");

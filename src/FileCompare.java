@@ -45,12 +45,12 @@ public class FileCompare {
 				Message message = new Message(); // create new message
 				message.fromString(stringMessage, dd, false); // reads message from string
 				OrderReader read = new OrderReader(message); // creates a parser object
-				String mapIndex = String.join("_", read.account, read.symbol, Character.toString(read.side)); // creates index for the hashmap
+				String mapIndex = String.join("_", read.getAccount(), read.getSymbol(), Character.toString(read.getSide())); // creates index for the hashmap
 				Execution exec = results.get(mapIndex); // get value with the particular index from the hashmap
 				if (exec != null) { // if the key is in the hashmap 
-					exec.add(read.quantity, read.lastPx); // use the add function of Execution to add data
+					exec.add(read.getQuantity(), read.getLastPx()); // use the add function of Execution to add data
 				} else { // if the key is not on the hashmap, create a new object
-					results.put(mapIndex, new Execution(read.quantity, read.quantity * read.lastPx));
+					results.put(mapIndex, new Execution(read.getQuantity(), read.getQuantity() * read.getLastPx()));
 				}
 			}
 			sc.close();

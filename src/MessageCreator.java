@@ -52,32 +52,32 @@ public class MessageCreator {
 		message.setField(new SecurityExchange("BVMF"));
 		message.setField(new ExecType('F'));
 		message.setField(new AccountType(39));
-		message.setField(new OrdStatus(order.ordStatus));
+		message.setField(new OrdStatus(order.getOrdStatus()));
 		
-		message.setField(new TransactTime(order.transactTime));
-		message.setField(new TradeDate(order.transactDate.toString()));
-		message.setField(new SendingTime(order.lastExecTime));
+		message.setField(new TransactTime(order.getTransactTime()));
+		message.setField(new TradeDate(order.getTransactDate().toString()));
+		message.setField(new SendingTime(order.getLastExecTime()));
 		
-		message.setField(new Side(order.side));
-		message.setField(new Symbol(order.symbol));;
-		message.setField(new OrderQty(order.quantity)); //<53>
-		message.setField(new ClOrdID(order.clOrdId));
-		message.setField(new OrderID(order.orderID));
-		message.setField(new Account(order.account));
-		message.setField(new ExecID(getNewExecID(order.symbol)));
+		message.setField(new Side(order.getSide()));
+		message.setField(new Symbol(order.getSymbol()));;
+		message.setField(new OrderQty(order.getQuantity())); //<53>
+		message.setField(new ClOrdID(order.getClOrdId()));
+		message.setField(new OrderID(order.getOrderID()));
+		message.setField(new Account(order.getAccount()));
+		message.setField(new ExecID(getNewExecID(order.getSymbol())));
 		
-		message.setField(new LastPx(order.lastPx));
-		message.setField(new Price(order.price)); // vamos considerar apenas ordens simples onde as execucoes sairao no preco de envio
-		message.setField(new LastQty(order.lastQty));
-		message.setField(new LeavesQty(order.leavesQty));
-		message.setField(new CumQty(order.cumQty));
-		message.setField(new AvgPx(order.avgPx));
+		message.setField(new LastPx(order.getLastPx()));
+		message.setField(new Price(order.getPrice())); // vamos considerar apenas ordens simples onde as execucoes sairao no preco de envio
+		message.setField(new LastQty(order.getLastQty()));
+		message.setField(new LeavesQty(order.getLeavesQty()));
+		message.setField(new CumQty(order.getCumQty()));
+		message.setField(new AvgPx(order.getAvgPx()));
 		return message;
 	}
 	
 	public static Message addRepeatingGroup (Message message, Order order){
 		NoPartyIDs noPartyIDs = new NoPartyIDs();
-		noPartyIDs.setField(new PartyID(order.trader));
+		noPartyIDs.setField(new PartyID(order.getTrader()));
 		noPartyIDs.setField(new PartyIDSource('D'));
 		noPartyIDs.setField(new PartyRole(36)); //entering trader
 		message.addGroup(noPartyIDs);

@@ -8,32 +8,31 @@ public class Order {
 	* Unique identifier for Order as assigned by sell-side. 
 	* Uniqueness is guaranteed within a single trading day/instrument.
 	*/
-	static int nextOrderID = 0;
+	private static int nextOrderID = 0;
 	
 	// Unique identifier for Order as assigned by the buy-side.
-	static int nextClOrdID = 0;
+	private static int nextClOrdID = 0;
 	
-	int quantity; // quantidade total desejada
-	double price; // preco de envio da ordem
-	double avgPx; // preco medio de execucao
+	private int quantity; // quantidade total desejada
+	private double price; // preco de envio da ordem
+	private double avgPx; // preco medio de execucao
 	
-	String clOrdId;
-	String orderID;
-	int cumQty;
-	double lastPx; // preco ultima execucao
-	int lastQty; // quantidade execucao atual
-	int leavesQty;
-	char side;
-	String symbol; // instrument
-	char ordStatus;
-	String account;
-	double execNotional;
-	String trader;
+	private String clOrdId;
+	private String orderID;
+	private int cumQty;
+	private double lastPx; // preco ultima execucao
+	private int lastQty; // quantidade execucao atual
+	private int leavesQty;
+	private char side;
+	private String symbol; // instrument
+	private char ordStatus;
+	private String account;
+	private double execNotional;
+	private String trader;
 
-	
-	LocalDateTime lastExecTime;
-	LocalDateTime transactTime;
-	LocalDate transactDate;
+	private LocalDateTime lastExecTime;
+	private LocalDateTime transactTime;
+	private LocalDate transactDate;
 	
 	public Order() {
 		this.quantity = RandomFields.RandomQuantity(); // quantidade total
@@ -102,4 +101,25 @@ public class Order {
 		nextOrderID = nextOrderID + 1;
 		return Integer.toString(nextOrderID);
 	}
+	
+	// getters, no need for setters
+	public String getClOrdId() { return this.clOrdId; }
+	public String getOrderID() { return this.orderID; }
+	public int getCumQty() {return this.cumQty;}
+	public double getLastPx() {return this.lastPx;}
+	public int getLastQty() {return this.lastQty;}
+	public int getLeavesQty() {return this.leavesQty;}
+	public char getSide() {return this.side;}
+	public String getSymbol() {return this.symbol;};
+	public char getOrdStatus() {return this.ordStatus;}
+	public String getAccount() {return this.account;}
+	public double getExecNotional() {return this.execNotional;}
+	public String getTrader() {return this.trader;}
+	public int getQuantity() {return this.quantity;}
+	public double getPrice() {return this.price;}
+	public double getAvgPx() {return this.avgPx;}
+	
+	public LocalDateTime getLastExecTime() {return this.lastExecTime;}
+	public LocalDateTime getTransactTime() {return this.transactTime;}
+	public LocalDate getTransactDate() {return this.transactDate;}
 }

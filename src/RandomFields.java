@@ -2,7 +2,9 @@ import java.util.Random;
 import java.lang.Math;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Duration;
+
 
 public class RandomFields {
 	
@@ -19,12 +21,16 @@ public class RandomFields {
 	
 	private static Random r = new Random();
 	
-	private static LocalDate day = LocalDate.of(2021, 11, 27);
+	private static final LocalDate day = LocalDate.of(2021, 11, 27);
 	// conta
 	// quantidade
 	public static int RandomQuantity() {
 		// returns a random int
-		return 500+100*(r.nextInt(25)*100);
+		return 500+10*(r.nextInt(25)*100);
+	}
+	public static int RandomQuantity(int upper) {
+		//returns a random int strictly smaller than upper
+		return 100 + r.nextInt((upper-100)/100)*100; // random execution between 100 and leavesQty - 100 included
 	}
 	
 	public static String RandomTrader() {
@@ -35,11 +41,6 @@ public class RandomFields {
 	public static String RandomAccount() {
 		int randAccInd = r.nextInt(accounts.length);
 		return accounts[randAccInd];
-	}
-	
-	public static int RandomQuantity(int upper) {
-		//returns a random int strictly smaller than upper
-		return 100 + r.nextInt((upper-100)/100)*100; // random execution between 100 and leavesQty - 100 included
 	}
 	
 	// preco
@@ -67,12 +68,13 @@ public class RandomFields {
 		int minute = r.nextInt(59);
 		int second = r.nextInt(59);
 		int nanosecond = r.nextInt(999)*1000000;
+		LocalTime time = LocalTime.of(hour, minute, second, nanosecond);
 		//return new SendingTime(LocalDateTime.of(2021,  11, 27, hour, minute, second, nanosecond));
-		return LocalDateTime.of(2021, 11, 27, hour, minute, second, nanosecond);
+		return LocalDateTime.of(day, time);
 	}
 	
 	public static LocalDateTime RandomSendingTime(LocalDateTime firstLocalDateTime) {
-		LocalDateTime end = LocalDateTime.of(2021, 11, 27, 17, 59, 59, 999); // close time
+		LocalDateTime end = LocalDateTime.of(day, LocalTime.of(17, 59, 59, 999)); // close time
 		long millis = Duration.between(firstLocalDateTime, end).toMillis();
 		// time of next trade is equal to the time of the last trade + random time up to 80% of the remaining time until close
 		return firstLocalDateTime.plus(Duration.ofMillis((long) (0.8*r.nextDouble() * millis)));
