@@ -21,15 +21,15 @@ public class MessagesGenerator {
 	public static void main(String[] args) {
 		// Part 1
 		generateNewMessages(); // create random orders
-		writeTxtFile("output.txt"); // write orders to txt file
+		writeTxtFile("MessageData.txt"); // write orders to txt file
 		
 		// Part 2
-		//MessageReader.FIXMessageReader("output.txt"); //read orders from file
-		//MessageReader.allMsgsCsv("AllMsgs.csv");
-		//MessageReader.writeFullFill("FullFill.txt");
+		MessageReader.FIXMessageReader("MessageData.txt"); //read orders from file
+		MessageReader.allMsgsCsv("AllMsgs.csv");
+		MessageReader.writeFullFill("FullFill.txt");
 
 		// Part 3
-		//FileCompare.compareFiles("FullFill.txt","AllMsgs.csv");
+		FileCompare.compareFiles("FullFill.txt", "AllMsgs.csv", "CompareFiles.csv");
 	}
 	
 	public static void generateNewMessages() {
@@ -56,9 +56,9 @@ public class MessagesGenerator {
 			if ((openOrders.size() != 0) && (chooseOrder == 0)){ // use open order
 				int orderIndex = r.nextInt(openOrders.size());
 				order = openOrders.remove(orderIndex);
-				System.out.println("Open Order");
+				// System.out.println("Open Order");
 			} else { // use new order
-				System.out.println("New Order");
+				// System.out.println("New Order");
 				order = new Order();
 			}
 			
@@ -77,10 +77,6 @@ public class MessagesGenerator {
 				
 			}	
 			messageArray[i] = MessageCreator.createMessage(order);
-			
-			// if the order was in the order list and we did 
-			
-			//System.out.println(messageArray[i].toString());
 			remainingMessages -= 1;
 		}
 		System.out.println("Number of full fills: " + Integer.toString(fullFillCreated));
@@ -89,7 +85,6 @@ public class MessagesGenerator {
 	public static void writeTxtFile(String fileName) {
 		File output = new File(fileName);
 		try {
-			//output.mkdirs();
 			output.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();

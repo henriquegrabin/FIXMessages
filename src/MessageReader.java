@@ -42,11 +42,12 @@ public class MessageReader {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Process Ended");	
+		System.out.println("Message files read");	
 	}
 	
 	
 	public static void allMsgsCsv(String filename) {
+		System.out.println("Creating " + filename);
 		File output = new File(filename);
 		try {
 			//output.mkdirs();
@@ -98,6 +99,7 @@ public class MessageReader {
 	}
 	
 	public static void writeFullFill(String filename) {
+		System.out.println("Creating " + filename);
 		File output = new File(filename);
 		OrdStatus ordStatus_field = new OrdStatus();
 		char ordStatus = ' ';

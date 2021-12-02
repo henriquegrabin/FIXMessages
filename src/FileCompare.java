@@ -19,11 +19,12 @@ import java.util.Set;
 public class FileCompare {
 	
 
-	public static void compareFiles(String fullFill, String allMsgs) {
+	public static void compareFiles(String fullFill, String allMsgs, String filename) {
 		
 		HashMap<String, Execution> fullFillExecution = fullFillTxtReader(fullFill);
 		HashMap<String, Execution> fullMessages = csvMessagesReader(allMsgs);
-		createFinalCSV(fullFillExecution, fullMessages);
+		createFinalCSV(fullFillExecution, fullMessages, filename);
+		System.out.println("Creating " + filename);
 	
 	}
 	
@@ -105,7 +106,7 @@ public class FileCompare {
 		return results;
 	}
 	
-	public static void createFinalCSV(HashMap<String, Execution> results_txt, HashMap<String, Execution> results_csv) {
+	public static void createFinalCSV(HashMap<String, Execution> results_txt, HashMap<String, Execution> results_csv, String filename) {
 		/*
 		 * Takes two hashmaps as inputs, one for csv file and another for txt file
 		 * Hashmap key : String with account_symbol_side
@@ -117,7 +118,7 @@ public class FileCompare {
 		combinedKeys.addAll(results_txt.keySet());
 		combinedKeys.addAll(results_csv.keySet());
 		
-		File output = new File("compare.csv");
+		File output = new File(filename);
 		try {
 			output.createNewFile();
             PrintWriter writer = new PrintWriter(output);

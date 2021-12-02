@@ -1,17 +1,20 @@
-import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 
+
 public class Order {
-	// Unique identifier for Order as assigned by sell-side.
+	/* 
+	* OrderID
+	* Unique identifier for Order as assigned by sell-side. 
+	* Uniqueness is guaranteed within a single trading day/instrument.
+	*/
 	static int nextOrderID = 0;
 	
 	// Unique identifier for Order as assigned by the buy-side.
 	static int nextClOrdID = 0;
 	
-	int quantity; // quantidade inicial
-	double price; // preco de ordem simples
-	
+	int quantity; // quantidade total desejada
+	double price; // preco de envio da ordem
 	double avgPx; // preco medio de execucao
 	
 	String clOrdId;
@@ -21,29 +24,19 @@ public class Order {
 	int lastQty; // quantidade execucao atual
 	int leavesQty;
 	char side;
-	String symbol; //instrument
-	ArrayList<Double> prices = new ArrayList<>(); //prices filled
-	ArrayList<Integer> quantities = new ArrayList<>(); //quantities filled
+	String symbol; // instrument
 	char ordStatus;
 	String account;
 	double execNotional;
 	String trader;
+
 	
 	LocalDateTime lastExecTime;
 	LocalDateTime transactTime;
 	LocalDate transactDate;
 	
-	public static String getNewClOrdID() {
-		nextClOrdID = nextClOrdID + 1;
-		return Integer.toString(nextClOrdID);
-	}
-	public static String getNewOrderID() {
-		nextOrderID = nextOrderID + 1;
-		return Integer.toString(nextOrderID);
-	}
-	
 	public Order() {
-		this.quantity = RandomFields.RandomQuantity(); //quantidade total
+		this.quantity = RandomFields.RandomQuantity(); // quantidade total
 		this.leavesQty = this.quantity;
 	
 		this.price = RandomFields.RandomPrice();
@@ -63,9 +56,6 @@ public class Order {
 		int partialFillQty = RandomFields.RandomQuantity(this.leavesQty); //quantidade partialfill
 		double partialFillPrice = this.price; //RandomFields.RandomPrice(); //preco do fill
 		
-		this.quantities.add(partialFillQty);
-		this.prices.add(partialFillPrice);
-		
 		this.cumQty = this.cumQty + partialFillQty;
 		this.leavesQty = this.quantity - this.cumQty;
 		this.lastQty = partialFillQty;
@@ -80,10 +70,7 @@ public class Order {
 	public void ExecuteAll() {
 		this.lastPx = this.price; //RandomFields.RandomPrice();
 		this.lastQty = this.leavesQty;
-		this.quantities.add(this.lastQty);
-		this.prices.add(this.lastPx);
-		
-		
+
 		this.cumQty = this.cumQty + this.lastQty;
 		this.avgPx = recalculateAvgPx();
 		this.leavesQty = this.quantity - this.cumQty;
@@ -107,4 +94,12 @@ public class Order {
 		return this.execNotional/this.cumQty;
 	}
 	
+	public static String getNewClOrdID() {
+		nextClOrdID = nextClOrdID + 1;
+		return Integer.toString(nextClOrdID);
+	}
+	public static String getNewOrderID() {
+		nextOrderID = nextOrderID + 1;
+		return Integer.toString(nextOrderID);
+	}
 }
