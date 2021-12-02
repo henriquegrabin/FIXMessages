@@ -5,23 +5,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Duration;
 
-
 public class RandomFields {
-	
-	private static String[] symbols = new String[] {"PETR4", "BBAS3", "VALE3",
-			"RAPT4", "SLCE3", "BPAC11", "POMO4", "ITUB4", "GOAU4", "IGTI3"};
-	
-	private static String[] traders = new String[] {"SMITH", "JOHNSON", "WILLIAMS", 
-			"BROWN", "JONES", "GARCIA", "MILLER", "DAVIS", "RODRIGUEZ", "MARTINEZ"};
-	
-	private static String[] accounts = new String[] {"918237", "918239", "071264", 
-			"981727", "849651", "498213", "987453", "879865", "164532"};
+	private static PropertiesReader prop = new PropertiesReader("random.properties");
+	private static String[] symbols = prop.getSymbols();
+	private static String[] traders = prop.getTraders();
+	private static String[] accounts = prop.getAccounts();
 	
 	private static char[] sides = new char[] {'1', '2'};
 	
 	private static Random r = new Random();
 	
 	private static final LocalDate day = LocalDate.of(2021, 11, 27);
+	private static final LocalTime closeTime = LocalTime.of(17, 59, 59, 999);
 	// conta
 	// quantidade
 	public static int RandomQuantity() {
@@ -74,7 +69,7 @@ public class RandomFields {
 	}
 	
 	public static LocalDateTime RandomSendingTime(LocalDateTime firstLocalDateTime) {
-		LocalDateTime end = LocalDateTime.of(day, LocalTime.of(17, 59, 59, 999)); // close time
+		LocalDateTime end = LocalDateTime.of(day, closeTime); // close time
 		long millis = Duration.between(firstLocalDateTime, end).toMillis();
 		// time of next trade is equal to the time of the last trade + random time up to 80% of the remaining time until close
 		return firstLocalDateTime.plus(Duration.ofMillis((long) (0.8*r.nextDouble() * millis)));

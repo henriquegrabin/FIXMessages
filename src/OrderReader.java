@@ -100,11 +100,11 @@ public class OrderReader {
 		return String.join(",", fields);
 	}
 	
-	public String getAccount() {return this.account;} //OK
-	public String getSymbol() {return this.symbol;} //OK
-	public char getSide() {return this.side;} // OK
-	public int getQuantity() {return this.quantity;} //OK
-	public double getLastPx() {return this.lastPx;} //OK
+	public String getAccount() {return this.account;}
+	public String getSymbol() {return this.symbol;}
+	public char getSide() {return this.side;}
+	public int getQuantity() {return this.quantity;}
+	public double getLastPx() {return this.lastPx;}
 
 	
 }

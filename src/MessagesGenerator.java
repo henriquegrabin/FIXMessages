@@ -19,6 +19,7 @@ public class MessagesGenerator {
 	public static Random r = new Random();
 	
 	public static void main(String[] args) {
+	
 		// Part 1
 		generateNewMessages(); // create random orders
 		writeTxtFile("MessageData.txt"); // write orders to txt file
