@@ -22,15 +22,15 @@ public class MessagesGenerator {
 	
 		// Part 1
 		generateNewMessages(); // create random orders
-		writeTxtFile("MessageData.txt"); // write orders to txt file
+		writeTxtFile("results/MessageData.txt"); // write orders to txt file
 		
 		// Part 2
-		MessageReader.FIXMessageReader("MessageData.txt"); //read orders from file
-		MessageReader.allMsgsCsv("AllMsgs.csv");
-		MessageReader.writeFullFill("FullFill.txt");
+		MessageReader.FIXMessageReader("results/MessageData.txt"); //read orders from file
+		MessageReader.allMsgsCsv("results/AllMsgs.csv");
+		MessageReader.writeFullFill("results/FullFill.txt");
 
 		// Part 3
-		FileCompare.compareFiles("FullFill.txt", "AllMsgs.csv", "CompareFiles.csv");
+		FileCompare.compareFiles("results/FullFill.txt", "results/AllMsgs.csv", "results/CompareFiles.csv");
 	}
 	
 	public static void generateNewMessages() {
