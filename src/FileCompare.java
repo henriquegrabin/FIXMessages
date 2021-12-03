@@ -44,7 +44,7 @@ public class FileCompare {
 				String stringMessage = sc.nextLine(); // the file doesnt have a header
 				Message message = new Message(); // create new message
 				message.fromString(stringMessage, dd, false); // reads message from string
-				OrderReader read = new OrderReader(message); // creates a parser object
+				Order read = new Order(message); // creates a parser object
 				String mapIndex = String.join("_", read.getAccount(), read.getSymbol(), Character.toString(read.getSide())); // creates index for the hashmap
 				Execution exec = results.get(mapIndex); // get value with the particular index from the hashmap
 				if (exec != null) { // if the key is in the hashmap 

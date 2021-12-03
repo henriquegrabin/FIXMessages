@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Duration;
 
-public class RandomFields {
+public class RandomFields  {
 	private static PropertiesReader prop = new PropertiesReader("random.properties");
 	private static String[] symbols = prop.getSymbols();
 	private static String[] traders = prop.getTraders();

@@ -57,10 +57,10 @@ public class MessageReader {
 		}
         try {
             PrintWriter writer = new PrintWriter(output);
-            writer.println(OrderReader.csvHeader());
+            writer.println(Order.csvHeader());
     		for (int i = 0; i < messageList.size(); i = i + 1) {
     			Message message = messageList.get(i);
-    			OrderReader read = new OrderReader(message);
+    			Order read = new Order(message);
     			writer.println(read.toStringCsv());
     		}
             writer.flush();

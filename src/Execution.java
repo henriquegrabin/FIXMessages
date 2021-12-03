@@ -2,7 +2,7 @@ public class Execution {
 	private double notional;
 	private int quantity;
 	
-	public Execution(int qty, double not) {
+	public Execution(int qty, double not)  {
 		this.quantity = qty;
 		this.notional = not;
 	}
