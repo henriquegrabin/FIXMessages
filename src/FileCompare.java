@@ -87,14 +87,15 @@ public class FileCompare {
 					String side = lineData.get(3);
 					
 					int quantity = Integer.parseInt(lineData.get(6));
-					double price = Double.parseDouble(lineData.get(7));
+					double cumNot = Double.parseDouble(lineData.get(10));
+					double price = cumNot/quantity; // PrecoMedio = NotionalAcumulado/Quantidade
 					
 					String mapIndex = String.join("_", account, symbol, side);
 					Execution exec = results.get(mapIndex);
 					if (exec != null) { // if the key is in the hashmap 
 						exec.add(quantity, price); // append values to the object
 					} else { // if the key is not on the hashmap
-						results.put(mapIndex, new Execution(quantity, quantity * price)); // create new object
+						results.put(mapIndex, new Execution(quantity, cumNot)); // create new object
 					}
 				}			
 					

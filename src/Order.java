@@ -45,6 +45,7 @@ public class Order {
 	private double execNotional;
 	private String trader;
 
+
 	private LocalDateTime lastExecTime;
 	private LocalDateTime transactTime;
 	private LocalDate transactDate;
@@ -53,7 +54,7 @@ public class Order {
 	private double orderNotional;
 	private double cumNotional;
 	
-	public Order() {
+	public Order() { // create new order
 		this.quantity = RandomFields.RandomQuantity(); // quantidade total
 		this.leavesQty = this.quantity;
 	
@@ -69,7 +70,7 @@ public class Order {
 		this.trader = RandomFields.RandomTrader();
 	}
 	
-	public Order(Message message) { // creater an order object from a message
+	public Order(Message message) { // read order from message
 		// Fields I am interested at
 		try {
 			// Instrumento
@@ -190,7 +191,7 @@ public class Order {
 		return Integer.toString(nextOrderID);
 	}
 	
-	
+	// this part is ugly and could be improved
 	public String toStringCsv() {
 		String[] fieldValues = {this.transactTime.toString(), this.account, this.symbol, String.valueOf(this.side), Integer.toString(this.quantity), Integer.toString(this.lastQty),
 				Integer.toString(this.cumQty), Double.toString(this.lastPx), Double.toString(this.orderNotional),

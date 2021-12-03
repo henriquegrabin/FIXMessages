@@ -33,7 +33,7 @@ public class PropertiesReader {
 		this.accounts = verifyProperty(prop.getProperty("contas"), defaultAccounts);
 	}
 	
-	public static String[] verifyProperty(String property, String[] defaultValues) {
+	public static String[] verifyProperty(String property, String[] defaultValues){
 			/*
 			 * Basic check if the config data is ok.
 			 */

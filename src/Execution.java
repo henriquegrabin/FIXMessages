@@ -3,8 +3,8 @@ public class Execution {
 	private int quantity;
 	
 	public Execution(int qty, double not)  {
-		this.quantity = qty;
-		this.notional = not;
+		this.quantity = qty; //quantidade
+		this.notional = not; //notional
 	}
 	
 	public void add(int qty, double price) {
